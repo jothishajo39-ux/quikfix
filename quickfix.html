@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickFix — Book Trusted Home Services Near You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF8;
+  --surface:#FFFFFF;
+  --ink:#1C2430;
+  --ink-dim:#5B6472;
+  --ink-faint:#94A0AF;
+  --teal:#0D9488;
+  --teal-dark:#0B7A70;
+  --teal-tint:#E6F5F3;
+  --coral:#FF6B4A;
+  --coral-dark:#E85535;
+  --coral-tint:#FFECE6;
+  --border:#E7E5E1;
+  --border-soft:#F0EEEA;
+  --star:#F5A623;
+  --radius:16px;
+  --radius-sm:10px;
+  --shadow:0 2px 8px rgba(28,36,48,0.05), 0 1px 2px rgba(28,36,48,0.04);
+  --shadow-lg:0 20px 50px -12px rgba(28,36,48,0.18);
+  --display:'Plus Jakarta Sans',sans-serif;
+  --body:'Inter',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--body);background:var(--bg);color:var(--ink);line-height:1.55;}
+a{color:inherit;}
+button{font-family:inherit;cursor:pointer;}
+.container{max-width:1180px;margin:0 auto;padding:0 24px;}
+@media (max-width:640px){.container{padding:0 16px;}}
+
+/* ---------- top nav ---------- */
+.topbar{
+  background:var(--surface);
+  border-bottom:1px solid var(--border-soft);
+  position:sticky;top:0;z-index:50;
+}
+.topbar-inner{
+  max-width:1180px;margin:0 auto;padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:20px;}
+.brand-mark{
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--teal),var(--teal-dark));
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px;
+}
+.brand-tag{font-family:var(--body);font-weight:500;font-size:12.5px;color:var(--ink-faint);display:block;margin-top:-2px;}
+.demo-badge{
+  font-family:var(--body);font-size:11.5px;font-weight:600;color:var(--teal-dark);
+  background:var(--teal-tint);padding:5px 12px;border-radius:100px;letter-spacing:0.02em;
+}
+@media (max-width:560px){.demo-badge{display:none;}}
+
+/* ---------- hero / search ---------- */
+.hero{padding:44px 0 28px;}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(26px,4vw,38px);letter-spacing:-0.01em;margin-bottom:8px;}
+.hero p{color:var(--ink-dim);font-size:15.5px;max-width:520px;margin-bottom:26px;}
+
+.search-bar{
+  display:flex;align-items:center;gap:10px;
+  background:var(--surface);border:1.5px solid var(--border);
+  border-radius:100px;padding:6px 6px 6px 20px;
+  box-shadow:var(--shadow);
+  max-width:620px;
+}
+.search-bar svg{flex-shrink:0;color:var(--ink-faint);}
+.search-bar input{
+  flex:1;border:none;outline:none;font-family:var(--body);font-size:15px;
+  padding:10px 0;background:transparent;color:var(--ink);
+}
+.search-bar input::placeholder{color:var(--ink-faint);}
+.search-btn{
+  background:var(--ink);color:#fff;border:none;border-radius:100px;
+  padding:11px 22px;font-weight:600;font-size:14px;flex-shrink:0;
+  transition:background .2s;
+}
+.search-btn:hover{background:var(--teal-dark);}
+
+.chip-scroll{display:flex;gap:10px;margin-top:22px;overflow-x:auto;padding-bottom:4px;}
+.chip-scroll::-webkit-scrollbar{height:0;}
+.cat-chip{
+  font-family:var(--body);font-size:13.5px;font-weight:600;color:var(--ink-dim);
+  background:var(--surface);border:1.5px solid var(--border);
+  padding:9px 17px;border-radius:100px;white-space:nowrap;flex-shrink:0;
+  transition:all .18s;
+}
+.cat-chip:hover{border-color:var(--teal);color:var(--teal-dark);}
+.cat-chip.active{background:var(--ink);border-color:var(--ink);color:#fff;}
+
+/* ---------- provider grid ---------- */
+.results-head{display:flex;align-items:baseline;justify-content:space-between;margin:36px 0 18px;}
+.results-head h2{font-family:var(--display);font-size:19px;font-weight:700;}
+.results-head span{color:var(--ink-faint);font-size:13.5px;}
+
+.provider-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  padding-bottom:60px;
+}
+@media (max-width:900px){.provider-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:620px){.provider-grid{grid-template-columns:1fr;}}
+
+.card{
+  background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);
+  padding:20px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:14px;
+  transition:transform .18s, box-shadow .18s;
+}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+.card-top{display:flex;gap:13px;align-items:flex-start;}
+.avatar{
+  width:52px;height:52px;border-radius:14px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-weight:700;font-size:18px;color:#fff;
+}
+.card-id{flex:1;min-width:0;}
+.card-name{font-family:var(--display);font-weight:700;font-size:16px;}
+.card-service{color:var(--ink-dim);font-size:13px;margin-top:2px;}
+.card-badge{
+  font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;
+  background:var(--teal-tint);color:var(--teal-dark);white-space:nowrap;
+}
+.card-badge.busy{background:#FFF1E8;color:#C4622E;}
+.card-meta{display:flex;align-items:center;gap:14px;font-size:13px;color:var(--ink-dim);}
+.stars{color:var(--star);font-weight:700;}
+.stars b{color:var(--ink);}
+.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid var(--border-soft);}
+.price{font-family:var(--display);font-weight:800;font-size:17px;}
+.price span{font-family:var(--body);font-weight:500;font-size:12px;color:var(--ink-faint);}
+.book-btn{
+  background:var(--coral);color:#fff;border:none;border-radius:10px;
+  padding:10px 18px;font-weight:700;font-size:13.5px;
+  transition:background .18s;
+}
+.book-btn:hover{background:var(--coral-dark);}
+.book-btn:disabled{background:var(--ink-faint);cursor:not-allowed;}
+
+.empty-state{
+  grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--ink-faint);
+}
+.empty-state svg{margin-bottom:12px;opacity:0.5;}
+
+/* ---------- modal ---------- */
+.overlay{
+  position:fixed;inset:0;background:rgba(20,26,33,0.55);
+  display:flex;align-items:center;justify-content:center;z-index:200;
+  padding:20px;opacity:0;pointer-events:none;transition:opacity .22s;
+}
+.overlay.open{opacity:1;pointer-events:auto;}
+.modal{
+  background:var(--surface);border-radius:20px;width:100%;max-width:460px;
+  max-height:88vh;overflow-y:auto;
+  transform:translateY(18px) scale(0.98);transition:transform .22s;
+  box-shadow:0 30px 80px rgba(0,0,0,0.3);
+}
+.overlay.open .modal{transform:translateY(0) scale(1);}
+.modal-head{
+  padding:22px 24px 16px;border-bottom:1px solid var(--border-soft);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.modal-head h3{font-family:var(--display);font-size:18px;font-weight:700;}
+.close-btn{
+  width:32px;height:32px;border-radius:50%;border:none;background:var(--border-soft);
+  color:var(--ink-dim);font-size:16px;display:flex;align-items:center;justify-content:center;
+  transition:background .18s;
+}
+.close-btn:hover{background:var(--border);}
+.modal-body{padding:22px 24px;}
+.provider-summary{
+  display:flex;gap:12px;align-items:center;background:var(--bg);
+  border-radius:var(--radius-sm);padding:14px;margin-bottom:20px;
+}
+.provider-summary .avatar{width:44px;height:44px;font-size:15px;border-radius:11px;}
+.provider-summary .n{font-family:var(--display);font-weight:700;font-size:14.5px;}
+.provider-summary .s{color:var(--ink-dim);font-size:12.5px;}
+
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--ink-dim);margin-bottom:6px;}
+.field input, .field select, .field textarea{
+  width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:11px 13px;font-family:var(--body);font-size:14px;color:var(--ink);
+  outline:none;transition:border-color .18s;background:var(--surface);
+}
+.field input:focus, .field select:focus, .field textarea:focus{border-color:var(--teal);}
+.field textarea{resize:vertical;min-height:70px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.err-msg{color:var(--coral-dark);font-size:12.5px;margin-top:6px;display:none;}
+.err-msg.show{display:block;}
+
+.confirm-btn{
+  width:100%;background:var(--coral);color:#fff;border:none;border-radius:var(--radius-sm);
+  padding:14px;font-weight:700;font-size:15px;transition:background .18s;
+}
+.confirm-btn:hover{background:var(--coral-dark);}
+
+/* ---------- session panel ---------- */
+.session-overlay{
+  position:fixed;inset:0;background:rgba(20,26,33,0.55);
+  display:flex;align-items:flex-end;justify-content:center;z-index:210;
+  opacity:0;pointer-events:none;transition:opacity .25s;
+}
+@media (min-width:640px){.session-overlay{align-items:center;}}
+.session-overlay.open{opacity:1;pointer-events:auto;}
+.session-panel{
+  background:var(--surface);width:100%;max-width:460px;
+  border-radius:20px 20px 0 0;
+  transform:translateY(100%);transition:transform .3s ease;
+  max-height:92vh;overflow-y:auto;
+}
+@media (min-width:640px){.session-panel{border-radius:20px;transform:translateY(18px) scale(0.98);}}
+.session-overlay.open .session-panel{transform:translateY(0) scale(1);}
+
+.session-head{
+  padding:22px 24px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));
+  color:#fff;border-radius:20px 20px 0 0;position:relative;
+}
+.session-head .status-label{font-size:12.5px;font-weight:600;opacity:0.85;letter-spacing:0.04em;text-transform:uppercase;}
+.session-head h3{font-family:var(--display);font-size:20px;font-weight:800;margin-top:4px;}
+.session-head .eta{font-size:13.5px;margin-top:6px;opacity:0.92;}
+.session-close{
+  position:absolute;top:18px;right:18px;width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,0.18);border:none;color:#fff;font-size:15px;
+}
+
+.stepper{padding:26px 24px 8px;}
+.step{display:flex;gap:14px;position:relative;padding-bottom:28px;}
+.step:last-child{padding-bottom:0;}
+.step::before{
+  content:"";position:absolute;left:13px;top:28px;bottom:0;width:2px;background:var(--border);
+}
+.step:last-child::before{display:none;}
+.step.done::before{background:var(--teal);}
+.step-dot{
+  width:27px;height:27px;border-radius:50%;flex-shrink:0;
+  border:2px solid var(--border);background:var(--surface);
+  display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--ink-faint);
+  transition:all .3s;z-index:1;
+}
+.step.done .step-dot{background:var(--teal);border-color:var(--teal);color:#fff;}
+.step.active .step-dot{border-color:var(--coral);color:var(--coral);animation:pulse 1.4s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,74,0.35);}50%{box-shadow:0 0 0 6px rgba(255,107,74,0);}}
+.step-text .t{font-weight:700;font-size:14px;color:var(--ink-faint);}
+.step.done .step-text .t, .step.active .step-text .t{color:var(--ink);}
+.step-text .d{font-size:12.5px;color:var(--ink-faint);margin-top:2px;}
+
+.session-info{padding:8px 24px 20px;}
+.info-row{
+  display:flex;justify-content:space-between;padding:10px 0;
+  border-bottom:1px solid var(--border-soft);font-size:13.5px;
+}
+.info-row:last-child{border-bottom:none;}
+.info-row .k{color:var(--ink-faint);}
+.info-row .v{font-weight:600;text-align:right;}
+
+.session-actions{display:flex;gap:10px;padding:4px 24px 24px;}
+.action-btn{
+  flex:1;border-radius:var(--radius-sm);padding:12px;font-weight:700;font-size:13.5px;
+  border:1.5px solid var(--border);background:var(--surface);color:var(--ink);
+  transition:all .18s;
+}
+.action-btn.primary{background:var(--ink);border-color:var(--ink);color:#fff;}
+.action-btn.danger{color:var(--coral-dark);border-color:var(--coral-tint);}
+.action-btn.danger:hover{background:var(--coral-tint);}
+.action-btn:hover:not(.danger){background:var(--bg);}
+
+.session-done-banner{
+  margin:0 24px 20px;padding:16px;border-radius:var(--radius-sm);
+  background:var(--teal-tint);color:var(--teal-dark);font-size:13.5px;font-weight:600;
+  display:flex;align-items:center;gap:10px;
+}
+
+/* ---------- toast ---------- */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--ink);color:#fff;padding:13px 22px;border-radius:100px;
+  font-size:13.5px;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,0.25);
+  z-index:300;opacity:0;pointer-events:none;transition:all .3s;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+footer{
+  text-align:center;padding:26px 20px;color:var(--ink-faint);font-size:12.5px;
+  border-top:1px solid var(--border-soft);
+}
+footer a{color:var(--teal-dark);font-weight:600;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">Q</div>
+      <div>QuickFix<span class="brand-tag">local home services, on demand</span></div>
+    </div>
+    <div class="demo-badge">● Live Demo — Frontend Prototype</div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="hero">
+    <h1>Home repairs, sorted in minutes.</h1>
+    <p>Search verified local providers for electrical, plumbing, cleaning, and more — book in a few taps and track your service in real time.</p>
+
+    <div class="search-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Search 'electrician', 'deep cleaning', or a provider name…">
+      <button class="search-btn" id="searchBtn">Search</button>
+    </div>
+
+    <div class="chip-scroll" id="catChips">
+      <button class="cat-chip active" data-cat="All">All Services</button>
+      <button class="cat-chip" data-cat="Electrician">⚡ Electrician</button>
+      <button class="cat-chip" data-cat="Plumber">🔧 Plumber</button>
+      <button class="cat-chip" data-cat="Cleaning">🧹 Cleaning</button>
+      <button class="cat-chip" data-cat="Carpenter">🪚 Carpenter</button>
+      <button class="cat-chip" data-cat="Painting">🎨 Painting</button>
+      <button class="cat-chip" data-cat="AC Repair">❄️ AC Repair</button>
+    </div>
+  </div>
+
+  <div class="results-head">
+    <h2 id="resultsTitle">All Providers Near You</h2>
+    <span id="resultsCount"></span>
+  </div>
+
+  <div class="provider-grid" id="providerGrid"></div>
+</div>
+
+<footer>QuickFix demo — built by Jothisha S · frontend prototype, no real bookings are made · <a href="index.html">← back to portfolio</a></footer>
+
+<!-- ================= BOOKING MODAL ================= -->
+<div class="overlay" id="bookingOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Confirm your booking</h3>
+      <button class="close-btn" id="closeModal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="provider-summary">
+        <div class="avatar" id="modalAvatar"></div>
+        <div>
+          <div class="n" id="modalName"></div>
+          <div class="s" id="modalService"></div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="bookDate">Date</label>
+          <input type="date" id="bookDate">
+        </div>
+        <div class="field">
+          <label for="bookTime">Time slot</label>
+          <select id="bookTime">
+            <option>9:00 AM – 11:00 AM</option>
+            <option>11:00 AM – 1:00 PM</option>
+            <option>2:00 PM – 4:00 PM</option>
+            <option>4:00 PM – 6:00 PM</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="bookAddress">Service address</label>
+        <textarea id="bookAddress" placeholder="House / flat no., street, area, city"></textarea>
+        <div class="err-msg" id="addressErr">Please enter your service address.</div>
+      </div>
+
+      <div class="field">
+        <label for="bookNotes">Notes for the provider (optional)</label>
+        <textarea id="bookNotes" placeholder="e.g. Ceiling fan not spinning, started yesterday"></textarea>
+      </div>
+
+      <button class="confirm-btn" id="confirmBtn">Confirm Booking</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SESSION PANEL ================= -->
+<div class="session-overlay" id="sessionOverlay">
+  <div class="session-panel">
+    <div class="session-head">
+      <button class="session-close" id="closeSession">✕</button>
+      <div class="status-label" id="statusLabel">Booking Requested</div>
+      <h3 id="sessionTitle">Finding your provider…</h3>
+      <div class="eta" id="etaText"></div>
+    </div>
+
+    <div class="stepper" id="stepper">
+      <div class="step" data-step="0">
+        <div class="step-dot">1</div>
+        <div class="step-text"><div class="t">Requested</div><div class="d">We've sent your request to the provider.</div></div>
+      </div>
+      <div class="step" data-step="1">
+        <div class="step-dot">2</div>
+        <div class="step-text"><div class="t">Confirmed</div><div class="d">Provider accepted and is getting ready.</div></div>
+      </div>
+      <div class="step" data-step="2">
+        <div class="step-dot">3</div>
+        <div class="step-text"><div class="t">On the way</div><div class="d">Provider is heading to your address.</div></div>
+      </div>
+      <div class="step" data-step="3">
+        <div class="step-dot">4</div>
+        <div class="step-text"><div class="t">Completed</div><div class="d">Service finished. Time to rate your experience.</div></div>
+      </div>
+    </div>
+
+    <div class="session-done-banner" id="doneBanner" style="display:none;">
+      ✓ Service completed — thanks for using QuickFix!
+    </div>
+
+    <div class="session-info">
+      <div class="info-row"><span class="k">Provider</span><span class="v" id="infoProvider"></span></div>
+      <div class="info-row"><span class="k">Service</span><span class="v" id="infoService"></span></div>
+      <div class="info-row"><span class="k">Slot</span><span class="v" id="infoSlot"></span></div>
+      <div class="info-row"><span class="k">Address</span><span class="v" id="infoAddress"></span></div>
+      <div class="info-row"><span class="k">Estimated total</span><span class="v" id="infoPrice"></span></div>
+    </div>
+
+    <div class="session-actions" id="sessionActions">
+      <button class="action-btn danger" id="cancelBtn">Cancel Booking</button>
+      <button class="action-btn primary" id="callBtn">Call Provider</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===================== MOCK DATA ===================== */
+const PROVIDERS = [
+  { id:1, name:"Ravi Kumar",      service:"Electrician", rating:4.8, reviews:212, price:349, distance:"1.2 km", color:"#0D9488", busy:false },
+  { id:2, name:"Meena Selvi",     service:"Cleaning",    rating:4.9, reviews:340, price:499, distance:"0.8 km", color:"#FF6B4A", busy:false },
+  { id:3, name:"Suresh Babu",     service:"Plumber",     rating:4.6, reviews:158, price:299, distance:"2.1 km", color:"#3B82F6", busy:true  },
+  { id:4, name:"Anitha Raj",      service:"Painting",    rating:4.7, reviews:96,  price:1499,distance:"3.4 km", color:"#A855F7", busy:false },
+  { id:5, name:"Karthik Nathan",  service:"Carpenter",   rating:4.5, reviews:74,  price:399, distance:"1.9 km", color:"#F59E0B", busy:false },
+  { id:6, name:"Divya Priya",     service:"AC Repair",   rating:4.9, reviews:188, price:599, distance:"1.0 km", color:"#06B6D4", busy:false },
+  { id:7, name:"Muthu Vel",       service:"Electrician", rating:4.4, reviews:63,  price:329, distance:"2.6 km", color:"#0D9488", busy:false },
+  { id:8, name:"Lakshmi Devi",    service:"Cleaning",    rating:4.8, reviews:255, price:449, distance:"1.5 km", color:"#FF6B4A", busy:false },
+  { id:9, name:"Prakash Iyer",    service:"Plumber",     rating:4.7, reviews:120, price:319, distance:"0.6 km", color:"#3B82F6", busy:false },
+];
+
+let activeCategory = "All";
+let searchTerm = "";
+let selectedProvider = null;
+let stepTimer = null;
+let etaTimer = null;
+let etaSeconds = 0;
+
+const grid = document.getElementById('providerGrid');
+const resultsTitle = document.getElementById('resultsTitle');
+const resultsCount = document.getElementById('resultsCount');
+
+/* ===================== RENDER PROVIDERS ===================== */
+function initials(name){
+  return name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+}
+
+function renderProviders(){
+  const term = searchTerm.trim().toLowerCase();
+  const filtered = PROVIDERS.filter(p => {
+    const matchesCat = activeCategory === "All" || p.service === activeCategory;
+    const matchesTerm = !term || p.name.toLowerCase().includes(term) || p.service.toLowerCase().includes(term);
+    return matchesCat && matchesTerm;
+  });
+
+  resultsTitle.textContent = activeCategory === "All" ? "All Providers Near You" : activeCategory + " Near You";
+  resultsCount.textContent = filtered.length + (filtered.length === 1 ? " provider" : " providers");
+
+  if(filtered.length === 0){
+    grid.innerHTML = `<div class="empty-state">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <div>No providers match "${term}". Try a different search or category.</div>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(p => `
+    <div class="card">
+      <div class="card-top">
+        <div class="avatar" style="background:${p.color}">${initials(p.name)}</div>
+        <div class="card-id">
+          <div class="card-name">${p.name}</div>
+          <div class="card-service">${p.service}</div>
+        </div>
+        <div class="card-badge ${p.busy ? 'busy' : ''}">${p.busy ? 'Busy today' : 'Available today'}</div>
+      </div>
+      <div class="card-meta">
+        <span class="stars">★ <b>${p.rating}</b></span>
+        <span>${p.reviews} reviews</span>
+        <span>${p.distance} away</span>
+      </div>
+      <div class="card-foot">
+        <div class="price">₹${p.price}<span> /visit</span></div>
+        <button class="book-btn" ${p.busy ? 'disabled' : ''} onclick="openBooking(${p.id})">${p.busy ? 'Unavailable' : 'Book Now'}</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ===================== FILTER CONTROLS ===================== */
+document.getElementById('catChips').addEventListener('click', (e) => {
+  const chip = e.target.closest('.cat-chip');
+  if(!chip) return;
+  document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  activeCategory = chip.dataset.cat;
+  renderProviders();
+});
+
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', (e) => {
+  searchTerm = e.target.value;
+  renderProviders();
+});
+document.getElementById('searchBtn').addEventListener('click', () => renderProviders());
+
+/* ===================== BOOKING MODAL ===================== */
+const bookingOverlay = document.getElementById('bookingOverlay');
+const modalAvatar = document.getElementById('modalAvatar');
+const modalName = document.getElementById('modalName');
+const modalService = document.getElementById('modalService');
+const bookDate = document.getElementById('bookDate');
+const bookAddress = document.getElementById('bookAddress');
+const addressErr = document.getElementById('addressErr');
+
+function openBooking(id){
+  selectedProvider = PROVIDERS.find(p => p.id === id);
+  if(!selectedProvider) return;
+  modalAvatar.style.background = selectedProvider.color;
+  modalAvatar.textContent = initials(selectedProvider.name);
+  modalName.textContent = selectedProvider.name;
+  modalService.textContent = selectedProvider.service + " · ₹" + selectedProvider.price + " /visit";
+
+  const today = new Date();
+  bookDate.value = today.toISOString().split('T')[0];
+  bookDate.min = today.toISOString().split('T')[0];
+  bookAddress.value = "";
+  addressErr.classList.remove('show');
+
+  bookingOverlay.classList.add('open');
+}
+
+function closeBookingModal(){ bookingOverlay.classList.remove('open'); }
+document.getElementById('closeModal').addEventListener('click', closeBookingModal);
+bookingOverlay.addEventListener('click', (e) => { if(e.target === bookingOverlay) closeBookingModal(); });
+
+document.getElementById('confirmBtn').addEventListener('click', () => {
+  if(!bookAddress.value.trim()){
+    addressErr.classList.add('show');
+    bookAddress.focus();
+    return;
+  }
+  closeBookingModal();
+  startSession();
+});
+
+/* ===================== SESSION PANEL ===================== */
+const sessionOverlay = document.getElementById('sessionOverlay');
+const statusLabel = document.getElementById('statusLabel');
+const sessionTitle = document.getElementById('sessionTitle');
+const etaText = document.getElementById('etaText');
+const steps = document.querySelectorAll('.step');
+const doneBanner = document.getElementById('doneBanner');
+const sessionActions = document.getElementById('sessionActions');
+const toast = document.getElementById('toast');
+
+const STAGES = [
+  { label:"Booking Requested",  title:"Finding your provider…",             eta:"Usually confirmed within 2 minutes" },
+  { label:"Booking Confirmed",  title:(p)=>p.name+" confirmed your booking", eta:"Getting ready to head your way" },
+  { label:"Provider En Route",  title:(p)=>p.name+" is on the way",         eta:"Arriving in" },
+  { label:"Service Completed",  title:"All done!",                           eta:"" },
+];
+
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2600);
+}
+
+function startSession(){
+  document.getElementById('infoProvider').textContent = selectedProvider.name;
+  document.getElementById('infoService').textContent = selectedProvider.service;
+  document.getElementById('infoSlot').textContent = bookDate.value + " · " + document.getElementById('bookTime').value;
+  document.getElementById('infoAddress').textContent = bookAddress.value.trim();
+  document.getElementById('infoPrice').textContent = "₹" + selectedProvider.price;
+
+  doneBanner.style.display = 'none';
+  sessionActions.style.display = 'flex';
+  sessionActions.innerHTML = `
+    <button class="action-btn danger" id="cancelBtn">Cancel Booking</button>
+    <button class="action-btn primary" id="callBtn">Call Provider</button>`;
+  document.getElementById('cancelBtn').addEventListener('click', cancelSession);
+  document.getElementById('callBtn').addEventListener('click', () => showToast('This is a demo — calling is simulated.'));
+
+  setStage(0);
+  sessionOverlay.classList.add('open');
+
+  etaSeconds = 18;
+  clearInterval(stepTimer);
+  clearInterval(etaTimer);
+
+  let stage = 0;
+  stepTimer = setInterval(() => {
+    stage++;
+    if(stage > 3){ clearInterval(stepTimer); clearInterval(etaTimer); return; }
+    setStage(stage);
+    if(stage === 3){
+      clearInterval(etaTimer);
+      doneBanner.style.display = 'flex';
+      sessionActions.innerHTML = `<button class="action-btn primary" id="doneBtn" style="width:100%;">Book Another Service</button>`;
+      document.getElementById('doneBtn').addEventListener('click', () => { sessionOverlay.classList.remove('open'); });
+      showToast('Service marked as completed ✓');
+    }
+  }, 4200);
+
+  etaTimer = setInterval(() => {
+    etaSeconds = Math.max(0, etaSeconds - 1);
+    if(stage === 2 || document.querySelector('.step.active')?.dataset.step === "2"){
+      etaText.textContent = "Arriving in ~" + Math.ceil(etaSeconds/60 * 10)/10 + " min";
+    }
+  }, 1000);
+}
+
+function setStage(stage){
+  const s = STAGES[stage];
+  statusLabel.textContent = s.label;
+  sessionTitle.textContent = typeof s.title === 'function' ? s.title(selectedProvider) : s.title;
+  etaText.textContent = stage === 2 ? "Arriving in ~3 min" : s.eta;
+
+  steps.forEach((el) => {
+    const i = parseInt(el.dataset.step);
+    el.classList.remove('done','active');
+    if(i < stage) el.classList.add('done');
+    else if(i === stage) el.classList.add(stage === 3 ? 'done' : 'active');
+  });
+}
+
+function cancelSession(){
+  clearInterval(stepTimer);
+  clearInterval(etaTimer);
+  sessionOverlay.classList.remove('open');
+  showToast('Booking cancelled.');
+}
+
+document.getElementById('closeSession').addEventListener('click', () => {
+  sessionOverlay.classList.remove('open');
+});
+
+/* ===================== INIT ===================== */
+renderProviders();
+</script>
+</body>
+</html>
