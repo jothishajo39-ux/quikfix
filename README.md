@@ -20,7 +20,6 @@ cd quikfix
 Open `index.html` in your browser.
 
 ## 🔗 Live Demo
-Working demo also featured in my [portfolio site] under "QuickFix AI Triage"
-
+Working demo also featured in my [https://jothishajo39-ux.github.io/quikfix/] under "QuickFix"
 ## 👤 Author
 Jothisha
